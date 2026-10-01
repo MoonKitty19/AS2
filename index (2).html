@@ -1,0 +1,1706 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>إلى عبد الله</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background:
+        radial-gradient(
+            circle at 50% 35%,
+            #18284a 0%,
+            #0d1830 32%,
+            #070e1f 70%,
+            #040914 100%
+        );
+
+    font-family: "Noto Naskh Arabic", sans-serif;
+
+    color: #fff;
+}
+
+/* =========================
+   CÉU
+========================= */
+
+#sky {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 0;
+}
+
+/* =========================
+   LUA
+========================= */
+
+.moon {
+    position: absolute;
+
+    top: 8%;
+    right: 10%;
+
+    width: 100px;
+    height: 100px;
+
+    z-index: 2;
+
+    animation: moonFloat 5s ease-in-out infinite;
+}
+
+.moon svg {
+    width: 100%;
+    height: 100%;
+
+    overflow: visible;
+}
+
+@keyframes moonFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+/* =========================
+   ENVELOPE
+========================= */
+
+.envelope-area {
+    position: absolute;
+
+    left: 50%;
+    top: 53%;
+
+    transform: translate(-50%, -50%);
+
+    width: min(82vw, 390px);
+
+    z-index: 5;
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.9s cubic-bezier(.22,.8,.25,1);
+}
+
+.envelope-area.hidden {
+    opacity: 0;
+
+    transform:
+        translate(-50%, -50%)
+        scale(.92);
+
+    pointer-events: none;
+}
+
+.envelope {
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 1.48;
+
+    cursor: pointer;
+
+    perspective: 900px;
+
+    filter:
+        drop-shadow(
+            0 12px 20px
+            rgba(0, 0, 0, 0.20)
+        );
+}
+
+.envelope-back {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            145deg,
+            #f9f2e7 0%,
+            #f1e7d7 50%,
+            #e9ddc9 100%
+        );
+
+    border-radius: 4px;
+
+    overflow: hidden;
+
+    box-shadow:
+        inset 0 0 0 1px
+        rgba(111, 83, 53, 0.10),
+
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.40);
+}
+
+.envelope-back::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background-image:
+        radial-gradient(
+            rgba(120, 95, 70, 0.06)
+            0.55px,
+            transparent 0.65px
+        );
+
+    background-size: 4.5px 4.5px;
+
+    opacity: 0.5;
+
+    pointer-events: none;
+
+    mix-blend-mode: multiply;
+}
+
+.fold-left {
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 50%;
+    height: 72%;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.22) 0%,
+            rgba(235, 222, 200, 0.45) 100%
+        );
+
+    clip-path:
+        polygon(
+            0 0,
+            100% 100%,
+            0 100%
+        );
+}
+
+.fold-right {
+    position: absolute;
+
+    right: 0;
+    bottom: 0;
+
+    width: 50%;
+    height: 72%;
+
+    background:
+        linear-gradient(
+            225deg,
+            rgba(255, 255, 255, 0.22) 0%,
+            rgba(235, 222, 200, 0.45) 100%
+        );
+
+    clip-path:
+        polygon(
+            100% 0,
+            100% 100%,
+            0 100%
+        );
+}
+
+.fold-bottom {
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 60%;
+
+    background:
+        linear-gradient(
+            to top,
+            #e6d8c2 0%,
+            #f0e5d4 50%,
+            #f5eee2 100%
+        );
+
+    clip-path:
+        polygon(
+            0 100%,
+            50% 0,
+            100% 100%
+        );
+}
+
+.flap {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 68%;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fbf6eb 0%,
+            #f1e7d7 60%,
+            #e9ddc9 100%
+        );
+
+    clip-path:
+        polygon(
+            0 0,
+            100% 0,
+            50% 100%
+        );
+
+    transform-origin: top center;
+
+    transition:
+        transform 1s cubic-bezier(.22, .75, .2, 1),
+        z-index 0s linear .45s;
+
+    z-index: 5;
+}
+
+/* =========================
+   CORAÇÃO
+========================= */
+
+.seal {
+    position: absolute;
+
+    left: 50%;
+    top: 56%;
+
+    width: 52px;
+    height: 52px;
+
+    transform:
+        translate(-50%, -50%);
+
+    z-index: 7;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    transition:
+        opacity .45s ease,
+        transform .55s
+        cubic-bezier(.2, .8, .2, 1);
+
+    animation:
+        heartPulse
+        2.2s
+        ease-in-out
+        infinite;
+}
+
+.seal svg {
+    width: 100%;
+    height: 100%;
+
+    filter:
+        drop-shadow(
+            0 0 6px
+            rgba(201, 78, 84, 0.50)
+        )
+
+        drop-shadow(
+            0 0 12px
+            rgba(201, 78, 84, 0.22)
+        )
+
+        drop-shadow(
+            0 2px 4px
+            rgba(90, 25, 30, 0.20)
+        );
+}
+
+@keyframes heartPulse {
+
+    0%,
+    100% {
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+    }
+
+    50% {
+        transform:
+            translate(-50%, -50%)
+            scale(1.11);
+    }
+}
+
+.envelope.open .flap {
+    transform: rotateX(180deg);
+
+    z-index: 1;
+}
+
+.envelope.open .seal {
+    opacity: 0;
+
+    animation: none;
+
+    transform:
+        translate(-50%, -50%)
+        scale(.65);
+}
+
+/* =========================
+   CARTA
+========================= */
+
+.letter-modal {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 20;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 6vh 6vw;
+
+    background:
+        rgba(2, 7, 17, .36);
+
+    backdrop-filter: blur(3px);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity .7s ease;
+
+    touch-action: none;
+}
+
+.letter-modal.show {
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+.letter-scroll-area {
+    position: relative;
+
+    width: min(88vw, 430px);
+
+    height: min(82vh, 690px);
+
+    overflow: hidden;
+
+    border-radius: 3px;
+
+    touch-action: none;
+
+    cursor: grab;
+}
+
+.letter-scroll-area:active {
+    cursor: grabbing;
+}
+
+.letter-body {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 100%;
+
+    min-height: 100%;
+
+    padding:
+        42px
+        30px
+        55px;
+
+    background:
+        linear-gradient(
+            110deg,
+            rgba(255,255,255,.32),
+            transparent 22%,
+            transparent 75%,
+            rgba(205,190,165,.10)
+        ),
+
+        linear-gradient(
+            180deg,
+            #fbf6eb 0%,
+            #f7f0e3 55%,
+            #f3eadb 100%
+        );
+
+    color: #25201c;
+
+    box-shadow:
+        0 18px 45px
+        rgba(0,0,0,.32),
+
+        inset 0 0 0 1px
+        rgba(117,93,63,.12),
+
+        inset 0 0 22px
+        rgba(120,92,56,.06);
+
+    border:
+        1px solid
+        rgba(119,93,61,.13);
+
+    will-change: transform;
+
+    user-select: none;
+
+    transform:
+        translateY(0);
+
+    direction: rtl;
+}
+
+.letter-body::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    opacity: .22;
+
+    background-image:
+        radial-gradient(
+            rgba(120,100,75,.08)
+            .45px,
+            transparent .55px
+        );
+
+    background-size: 5px 5px;
+
+    mix-blend-mode: multiply;
+}
+
+.letter-body::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 7px;
+
+    border:
+        1px solid
+        rgba(126,101,70,.07);
+
+    pointer-events: none;
+}
+
+.letter-content {
+    position: relative;
+
+    z-index: 2;
+
+    direction: rtl;
+}
+
+.letter-header {
+    margin-bottom: 28px;
+
+    text-align: right;
+}
+
+.letter-header h1 {
+    font-family:
+        "Noto Naskh Arabic",
+        sans-serif;
+
+    font-size: 38px;
+
+    font-weight: 600;
+
+    letter-spacing: 0;
+
+    color: #302820;
+
+    line-height: 1.4;
+}
+
+.letter-text {
+    font-family:
+        "Noto Naskh Arabic",
+        sans-serif;
+
+    font-size: 22px;
+
+    line-height: 1.9;
+
+    font-weight: 500;
+
+    text-align: right;
+}
+
+.letter-text p {
+    margin-bottom: 21px;
+}
+
+.signature {
+    margin-top: 34px;
+
+    font-family:
+        "Noto Naskh Arabic",
+        sans-serif;
+
+    font-size: 24px;
+
+    font-style: normal;
+
+    text-align: left;
+
+    direction: rtl;
+}
+
+/* TEXTO FINAL */
+
+.close-hint {
+    margin-top: 48px;
+
+    text-align: center;
+
+    font-family:
+        "Noto Naskh Arabic",
+        sans-serif;
+
+    font-size: 21px;
+
+    color: #5a4936;
+
+    opacity: 0.9;
+}
+
+.close-btn {
+    position: absolute;
+
+    top: 15px;
+    left: 15px;
+
+    width: 34px;
+    height: 34px;
+
+    border: 0;
+
+    border-radius: 50%;
+
+    background:
+        rgba(60,45,30,.08);
+
+    color: #5a4936;
+
+    font-size: 21px;
+
+    cursor: pointer;
+
+    z-index: 30;
+}
+
+/* =========================
+   GATINHO
+========================= */
+
+.cat-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 40;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        rgba(4, 9, 20, 0.55);
+
+    backdrop-filter: blur(6px);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity 1.1s ease;
+}
+
+.cat-overlay.show {
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+.cat-overlay img {
+    max-width:
+        min(88vw, 380px);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 20px 50px
+        rgba(0,0,0,0.35);
+
+    transform:
+        scale(0.92);
+
+    transition:
+        transform 1.1s
+        cubic-bezier(.22,.8,.25,1);
+}
+
+.cat-overlay.show img {
+    transform:
+        scale(1);
+}
+
+/* =========================
+   CELULAR
+========================= */
+
+@media (max-width: 600px) {
+
+    .moon {
+        width: 82px;
+        height: 82px;
+
+        top: 7%;
+        right: 7%;
+    }
+
+    .envelope-area {
+        width: 84vw;
+
+        top: 53%;
+    }
+
+    .letter-modal {
+        padding:
+            5vh
+            5vw;
+    }
+
+    .letter-scroll-area {
+        width: 90vw;
+
+        height: 84vh;
+    }
+
+    .letter-body {
+        padding:
+            37px
+            24px
+            50px;
+    }
+
+    .letter-header h1 {
+        font-size: 35px;
+    }
+
+    .letter-text {
+        font-size: 21px;
+
+        line-height: 1.9;
+    }
+
+}
+
+@media (max-height: 700px) {
+
+    .letter-scroll-area {
+        height: 86vh;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<canvas id="sky"></canvas>
+
+<!-- LUA -->
+
+<div class="moon">
+
+    <svg viewBox="0 0 120 120">
+
+        <defs>
+
+            <linearGradient
+                id="moonGradient"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="100%"
+            >
+
+                <stop
+                    offset="0%"
+                    stop-color="#ffffff"
+                />
+
+                <stop
+                    offset="55%"
+                    stop-color="#fffefa"
+                />
+
+                <stop
+                    offset="100%"
+                    stop-color="#f1eee5"
+                />
+
+            </linearGradient>
+
+        </defs>
+
+        <path
+            d="
+                M76 16
+                C51 23 36 43 37 64
+                C38 88 57 105 79 104
+                C91 103 101 97 108 88
+                C101 91 94 93 87 92
+                C66 90 51 75 51 55
+                C51 38 61 24 76 16Z
+            "
+            fill="url(#moonGradient)"
+        />
+
+        <circle
+            cx="69"
+            cy="39"
+            r="3"
+            fill="rgba(190,185,175,.24)"
+        />
+
+        <circle
+            cx="61"
+            cy="62"
+            r="2.2"
+            fill="rgba(190,185,175,.20)"
+        />
+
+        <circle
+            cx="79"
+            cy="73"
+            r="2.8"
+            fill="rgba(190,185,175,.18)"
+        />
+
+        <circle
+            cx="69"
+            cy="84"
+            r="1.7"
+            fill="rgba(190,185,175,.17)"
+        />
+
+    </svg>
+
+</div>
+
+
+<!-- ENVELOPE -->
+
+<div
+    class="envelope-area"
+    id="envelopeArea"
+>
+
+    <div
+        class="envelope"
+        id="envelope"
+    >
+
+        <div class="envelope-back"></div>
+
+        <div class="fold-left"></div>
+
+        <div class="fold-right"></div>
+
+        <div class="fold-bottom"></div>
+
+        <div class="flap"></div>
+
+        <!-- CORAÇÃO -->
+
+        <div class="seal">
+
+            <svg
+                viewBox="0 0 32 32"
+                fill="none"
+            >
+
+                <defs>
+
+                    <linearGradient
+                        id="heartGrad"
+                        x1="0%"
+                        y1="0%"
+                        x2="100%"
+                        y2="100%"
+                    >
+
+                        <stop
+                            offset="0%"
+                            stop-color="#e85a65"
+                        />
+
+                        <stop
+                            offset="45%"
+                            stop-color="#d14550"
+                        />
+
+                        <stop
+                            offset="100%"
+                            stop-color="#b83a45"
+                        />
+
+                    </linearGradient>
+
+                    <filter
+                        id="heartGlow"
+                        x="-40%"
+                        y="-40%"
+                        width="180%"
+                        height="180%"
+                    >
+
+                        <feGaussianBlur
+                            in="SourceGraphic"
+                            stdDeviation="1.2"
+                            result="blur"
+                        />
+
+                        <feMerge>
+
+                            <feMergeNode in="blur"/>
+
+                            <feMergeNode in="SourceGraphic"/>
+
+                        </feMerge>
+
+                    </filter>
+
+                </defs>
+
+                <path
+                    d="
+                        M16 28.5
+                        C16 28.5 4 19.5 4 12.5
+                        C4 8.5 7 5.5 11 5.5
+                        C13.2 5.5 15.1 6.6 16 8.2
+                        C16.9 6.6 18.8 5.5 21 5.5
+                        C25 5.5 28 8.5 28 12.5
+                        C28 19.5 16 28.5 16 28.5Z
+                    "
+                    fill="url(#heartGrad)"
+                    filter="url(#heartGlow)"
+                />
+
+            </svg>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- CARTA -->
+
+<div
+    class="letter-modal"
+    id="letterModal"
+>
+
+    <div
+        class="letter-scroll-area"
+        id="letterScrollArea"
+    >
+
+        <button
+            class="close-btn"
+            id="closeLetter"
+            aria-label="إغلاق الرسالة"
+        >
+            ×
+        </button>
+
+        <div
+            class="letter-body"
+            id="letterBody"
+        >
+
+            <div class="letter-content">
+
+                <div class="letter-header">
+
+                    <h1>
+                        عبد الله،
+                    </h1>
+
+                </div>
+
+
+                <div class="letter-text">
+
+
+                    <p>
+                        لم أكن أعرف جيدًا كيف أبدأ هذه الرسالة.
+                    </p>
+
+
+                    <p>
+                        ربما لأن هناك أشياء كثيرة أود أن أقولها لك،
+                        وعندما أحاول أن أرتبها، أشعر أن أي طريقة لا تبدو كافية
+                        للتعبير عما أريد أن أقوله لك.
+                        لذلك سأكتبها ببساطة كما تأتي إلى قلبي.
+                    </p>
+
+
+                    <p>
+                        لقد أصبحت جزءًا مميزًا جدًا من حياتي.
+                        ليس فقط بسبب الأحاديث التي دارت بيننا أو الأشياء التي شاركناها،
+                        بل بسبب كل ما حدث بداخلي أثناء وجودك في حياتي.
+                        ومن الغريب أن أفكر أننا نعرف بعضنا منذ أقل من عام،
+                        ومع ذلك أشعر أحيانًا وكأنني أعرفك منذ سنوات.
+                    </p>
+
+
+                    <p>
+                        عندما أفكر في هذه المرحلة من حياتي، أتذكر الكثير من التغييرات.
+                        أشياء بدأت أتساءل عنها، وأشياء بدأت أراها بطريقة مختلفة،
+                        وتقربي من الله، واللحظات التي شعرت فيها بالضياع،
+                        وكذلك اللحظات التي شعرت فيها أخيرًا أنني أجد بعض الطريق.
+                        لقد كنت دائمًا إلى جانبي، حتى في الأوقات التي كان فيها ذلك صعبًا جدًا.
+                    </p>
+
+
+                    <p>
+                        هناك أحاديث بيننا انتهت منذ وقت طويل،
+                        لكنها بقيت معي.
+                        كلمات قلتها لي مرة، ثم عادت إلى ذهني في أوقات أخرى.
+                        وأشياء علمتني إياها دون أن تحاول بالضرورة أن تعلمني شيئًا.
+                    </p>
+
+
+                    <p>
+                        وهذا أكثر ما أريدك أن تعرفه:
+                        لقد تركت أثرًا في داخلي.
+                    </p>
+
+
+                    <p>
+                        لا أقول ذلك وكأنه شيء عظيم أو درامي.
+                        إنها آثار صغيرة أيضًا؛
+                        في الأشياء التي أصبحت ألاحظها،
+                        وفي الأسئلة التي بدأت أطرحها،
+                        وفي الطرق المختلفة التي أصبحت أنظر بها إلى بعض الأمور.
+                    </p>
+
+
+                    <p>
+                        أنت تعرف أنني لست دائمًا سهلة الفهم.
+                        وأحيانًا حتى أنا لا أفهم تمامًا ما أشعر به.
+                        وما زالت لدي أيام أشعر فيها بالحزن أو الإحباط أو كثرة التساؤلات.
+                    </p>
+
+
+                    <p>
+                        بعض هذه الأيام يكون بسبب أشياء صغيرة في الحياة،
+                        وبعضها الآخر يتعلق بإيماني،
+                        وبالخوف من أنني لا أفعل ما يكفي،
+                        أو أنني أسير ببطء أكثر مما ينبغي.
+                    </p>
+
+
+                    <p>
+                        وربما من أكثر الأشياء التي أريد أن أحتفظ بها من كل هذا
+                        هو مقدار ما تعلمته منك،
+                        بينما كنت لا أزال أحاول أن أكتشف من أنا.
+                    </p>
+
+
+                    <p>
+                        لا أريد أن يبدو هذا أكبر مما هو،
+                        ولا أصغر مما هو.
+                        أريده فقط أن يكون صادقًا.
+                    </p>
+
+
+                    <p>
+                        أحب أن أتذكر الأشياء الصغيرة؛
+                        وفي الحقيقة، هي كبيرة جدًا بالنسبة لي.
+                        الأحاديث التي دارت بيننا،
+                        والأشياء التي أخبرتني عنها،
+                        والرسومات،
+                        والمزاح،
+                        والمرات التي حاولت فيها أن تشرح لي شيئًا،
+                        والتفاصيل الصغيرة من حياتك التي شاركتني إياها.
+                    </p>
+
+
+                    <p>
+                        وأنا أعلم أن لكل ذلك معنى جميلًا جدًا بالنسبة لنا نحن الاثنين.
+                    </p>
+
+
+                    <p>
+                        ولهذا أردت أن أكتب لك هذه الرسالة.
+                        ليس لأن لدي شيئًا استثنائيًا لأعلنه،
+                        ولا لأنني أنتظر منك جوابًا.
+                        فقط لأنني أحيانًا أتمنى لو استطعت أن ترى الأشياء
+                        التي لا تظهر في أحاديثنا.
+                        وحتى إن كانت تظهر، أريد دائمًا أن أذكّرك بها.
+                        وفوق كل ذلك، أردت أن أصنع شيئًا لطيفًا لك، ههه.
+                    </p>
+
+
+                    <p>
+                        أريدك أن تعرف كم أقدّر ما عشناه حتى الآن،
+                        وكم أقدّر كل ما فعلته من أجلي،
+                        وكل ما أنت مستعد لفعله.
+                        وكم كان لوجودك أثر كبير في حياتي بكل الطرق الممكنة؛
+                        لقد غيّرت حياتي تمامًا.
+                    </p>
+
+
+                    <p>
+                        والأهم من ذلك كله،
+                        كم أنا ممتنة لله لأنه سمح لي أن أعرفك.
+                    </p>
+
+
+                    <p>
+                        ربما لن أستطيع أبدًا أن أشرح تمامًا ماذا تعني لي.
+                        ولا بأس بذلك؛
+                        فأنا أعلم أنك تعرف ما أشعر به في قلبي.
+                    </p>
+
+
+                    <p>
+                        بعض الأشياء لا تحتاج إلى تعريف حتى تكون حقيقية.
+                    </p>
+
+
+                    <p>
+                        أسأل الله أن يرعاك ويحفظك،
+                        وأن ينير خطواتك،
+                        وأن ييسّر عليك ما يصعب،
+                        وأن يضع البركة في الطريق الذي ستسلكه.
+                    </p>
+
+
+                    <p>
+                        وأن يتيح لي أن أواصل التعلم والنمو
+                        والسير في الطريق الصحيح. 🤍✨️
+                    </p>
+
+
+                    <p>
+                        شكرًا لك على كل شيء، يا عبد الله.
+                    </p>
+
+
+                    <div class="signature">
+
+                        بكل الود،<br>
+                        سارة
+
+                    </div>
+
+
+                    <p class="close-hint">
+                        الآن يمكنك إغلاق الرسالة 🙈
+                    </p>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- GATINHO -->
+
+<div
+    class="cat-overlay"
+    id="catOverlay"
+>
+
+    <img
+        src="imagens/gatinho.jpg"
+        alt="قطة لطيفة"
+    >
+
+</div>
+
+
+<script>
+
+/* =========================
+   ESTRELAS
+========================= */
+
+const canvas =
+    document.getElementById("sky");
+
+const ctx =
+    canvas.getContext("2d");
+
+let stars = [];
+
+
+function resizeCanvas() {
+
+    canvas.width =
+        window.innerWidth;
+
+    canvas.height =
+        window.innerHeight;
+
+    stars = [];
+
+    const amount =
+        Math.floor(
+            (
+                window.innerWidth *
+                window.innerHeight
+            ) / 5000
+        );
+
+
+    for (
+        let i = 0;
+        i < amount;
+        i++
+    ) {
+
+        stars.push({
+
+            x:
+                Math.random() *
+                canvas.width,
+
+            y:
+                Math.random() *
+                canvas.height,
+
+            radius:
+                Math.random() *
+                1.35 + .25,
+
+            alpha:
+                Math.random() *
+                .60 + .25,
+
+            speed:
+                Math.random() *
+                .012 + .004,
+
+            phase:
+                Math.random() *
+                Math.PI * 2
+
+        });
+
+    }
+
+}
+
+
+function drawStars(time = 0) {
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    stars.forEach(star => {
+
+        const pulse =
+            Math.sin(
+                time *
+                star.speed +
+                star.phase
+            ) * .20;
+
+
+        const alpha =
+            Math.max(
+                .08,
+                star.alpha + pulse
+            );
+
+
+        /* ESTRELA */
+
+        ctx.beginPath();
+
+        ctx.arc(
+            star.x,
+            star.y,
+            star.radius,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fillStyle =
+            `rgba(255,255,255,${alpha})`;
+
+        ctx.fill();
+
+
+        /* BRILHO */
+
+        if (star.radius > .9) {
+
+            const glow =
+                ctx.createRadialGradient(
+                    star.x,
+                    star.y,
+                    0,
+                    star.x,
+                    star.y,
+                    star.radius * 5
+                );
+
+
+            glow.addColorStop(
+                0,
+                `rgba(255,255,255,${alpha * .45})`
+            );
+
+
+            glow.addColorStop(
+                1,
+                `rgba(255,255,255,0)`
+            );
+
+
+            ctx.beginPath();
+
+            ctx.arc(
+                star.x,
+                star.y,
+                star.radius * 5,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fillStyle =
+                glow;
+
+            ctx.fill();
+
+
+            /* CRUZ DE LUZ */
+
+            ctx.beginPath();
+
+            ctx.moveTo(
+                star.x - 3.5,
+                star.y
+            );
+
+            ctx.lineTo(
+                star.x + 3.5,
+                star.y
+            );
+
+            ctx.moveTo(
+                star.x,
+                star.y - 3.5
+            );
+
+            ctx.lineTo(
+                star.x,
+                star.y + 3.5
+            );
+
+
+            ctx.strokeStyle =
+                `rgba(255,255,255,${alpha * .65})`;
+
+            ctx.lineWidth = .6;
+
+            ctx.stroke();
+
+        }
+
+    });
+
+
+    requestAnimationFrame(drawStars);
+
+}
+
+
+resizeCanvas();
+
+requestAnimationFrame(drawStars);
+
+window.addEventListener(
+    "resize",
+    resizeCanvas
+);
+
+
+/* =========================
+   ELEMENTOS
+========================= */
+
+const envelope =
+    document.getElementById(
+        "envelope"
+    );
+
+const envelopeArea =
+    document.getElementById(
+        "envelopeArea"
+    );
+
+const letterModal =
+    document.getElementById(
+        "letterModal"
+    );
+
+const letterScrollArea =
+    document.getElementById(
+        "letterScrollArea"
+    );
+
+const letterBody =
+    document.getElementById(
+        "letterBody"
+    );
+
+const closeLetter =
+    document.getElementById(
+        "closeLetter"
+    );
+
+const catOverlay =
+    document.getElementById(
+        "catOverlay"
+    );
+
+
+/* =========================
+   ARRASTAR CARTA
+========================= */
+
+let letterOffset = 0;
+
+let startY = 0;
+
+let startOffset = 0;
+
+let isDraggingLetter = false;
+
+
+function getMaxLetterOffset() {
+
+    return Math.max(
+        0,
+
+        letterBody.scrollHeight -
+        letterScrollArea.clientHeight
+    );
+
+}
+
+
+function startLetterDrag(e) {
+
+    if (
+        e.target.closest(
+            ".close-btn"
+        )
+    ) {
+        return;
+    }
+
+    isDraggingLetter = true;
+
+    startY = e.clientY;
+
+    startOffset =
+        letterOffset;
+
+    letterBody.style.transition =
+        "none";
+
+
+    if (
+        letterScrollArea.setPointerCapture
+    ) {
+
+        letterScrollArea.setPointerCapture(
+            e.pointerId
+        );
+
+    }
+
+}
+
+
+function moveLetterDrag(e) {
+
+    if (
+        !isDraggingLetter
+    ) {
+        return;
+    }
+
+
+    letterOffset =
+        Math.max(
+            0,
+
+            Math.min(
+                startOffset +
+                (
+                    startY -
+                    e.clientY
+                ),
+
+                getMaxLetterOffset()
+            )
+        );
+
+
+    letterBody.style.transform =
+        `translateY(${-letterOffset}px)`;
+
+}
+
+
+function endLetterDrag(e) {
+
+    if (
+        !isDraggingLetter
+    ) {
+        return;
+    }
+
+
+    isDraggingLetter = false;
+
+
+    letterBody.style.transition =
+        "transform .12s ease-out";
+
+
+    if (
+        e &&
+        letterScrollArea.releasePointerCapture
+    ) {
+
+        try {
+
+            letterScrollArea.releasePointerCapture(
+                e.pointerId
+            );
+
+        } catch {}
+
+    }
+
+}
+
+
+letterScrollArea.addEventListener(
+    "pointerdown",
+    startLetterDrag
+);
+
+letterScrollArea.addEventListener(
+    "pointermove",
+    moveLetterDrag
+);
+
+letterScrollArea.addEventListener(
+    "pointerup",
+    endLetterDrag
+);
+
+letterScrollArea.addEventListener(
+    "pointercancel",
+    endLetterDrag
+);
+
+
+/* =========================
+   ABRIR ENVELOPE
+========================= */
+
+envelope.addEventListener(
+    "click",
+    () => {
+
+        envelope.classList.add(
+            "open"
+        );
+
+
+        setTimeout(
+            () => {
+
+                envelopeArea.classList.add(
+                    "hidden"
+                );
+
+            },
+            650
+        );
+
+
+        setTimeout(
+            () => {
+
+                letterOffset = 0;
+
+                letterBody.style.transition =
+                    "none";
+
+                letterBody.style.transform =
+                    "translateY(0)";
+
+                letterModal.classList.add(
+                    "show"
+                );
+
+            },
+            1050
+        );
+
+    }
+);
+
+
+/* =========================
+   FECHAR CARTA → GATINHO
+========================= */
+
+closeLetter.addEventListener(
+    "click",
+    (e) => {
+
+        e.stopPropagation();
+
+        letterModal.classList.remove(
+            "show"
+        );
+
+
+        setTimeout(
+            () => {
+
+                catOverlay.classList.add(
+                    "show"
+                );
+
+            },
+            700
+        );
+
+    }
+);
+
+
+/* =========================
+   REDIMENSIONAMENTO
+========================= */
+
+window.addEventListener(
+    "resize",
+    () => {
+
+        if (
+            letterModal.classList.contains(
+                "show"
+            )
+        ) {
+
+            letterOffset =
+                Math.max(
+                    0,
+
+                    Math.min(
+                        letterOffset,
+                        getMaxLetterOffset()
+                    )
+                );
+
+
+            letterBody.style.transform =
+                `translateY(${-letterOffset}px)`;
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
